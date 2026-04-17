@@ -1,28 +1,28 @@
+# This workflow will build a .NET project
+
 name: .NET
 
 on:
   pull_request:
-    branches:
-      - develop
+    branches: [ "develop" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup .NET
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Install .NET
-        uses: actions/setup-dotnet@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
 
       - name: Restore dependencies
-        run: dotnet restore TuSolucion.sln
+        run: dotnet restore test1.sln
 
       - name: Build
-        run: dotnet build TuSolucion.sln --no-restore
+        run: dotnet build test1.sln --no-restore
 
       - name: Test
-        run: dotnet test test1.sln --no-build --no-restore
+        run: dotnet test test1.sln --no-build --verbosity normal
